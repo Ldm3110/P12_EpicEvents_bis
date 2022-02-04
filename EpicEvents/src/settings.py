@@ -44,6 +44,9 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_extensions',
     'rest_framework_simplejwt',
+
+    'api_users',
+    'api_customers',
 ]
 
 MIDDLEWARE = [
@@ -129,7 +132,7 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTH_USER_MODEL = 'api_users.Employees'
+# AUTH_USER_MODEL = 'api_users.Employees'
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
