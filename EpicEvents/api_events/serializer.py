@@ -1,3 +1,5 @@
+import datetime
+
 from rest_framework import serializers
 from .models import Events
 
@@ -16,3 +18,11 @@ class EventSerializer(serializers.ModelSerializer):
             'client',
             'contract'
         ]
+
+    def validate(self, data):
+        """
+        Check that the event date is after the current date.
+        """
+        if data['event_date'] < datetime.datetime.now().date():
+            raise serializers.ValidationError({"event_date": "This date must be after the current date"})
+        return data
