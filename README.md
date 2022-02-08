@@ -83,3 +83,12 @@ You will need to fill in the following information :
 Refer to the API documentation at the following address :
 
 "Adress Postman"
+
+## Flake8 Report
+
+In order to ensure a Code respecting the PEP8 rules, you can access a FLAKE8 report by typing the following commands:
+
+```
+$ cd flake8_report
+$ open index.html
+```
