@@ -33,9 +33,9 @@ class ContractCreation(CreateAPIView):
         if serializer.is_valid():
             customer = Customers.objects.filter(id=serializer.validated_data['client'].id)
             self.check_object_permissions(self.request, customer)
-            new_contract = serializer.save(sales_contact=self.request.user)
+            serializer.save(sales_contact=self.request.user)
             return Response(
-                {"success": f"The Contract has been successfully created !"},
+                {"success": "The Contract has been successfully created !"},
                 status=status.HTTP_201_CREATED
             )
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -64,7 +64,7 @@ class ContractListFilter(ListAPIView):
             customer = Customers.objects.filter(id=queryset[0].client_id)
         except IndexError:
             return Response(
-                {"error": f"No existing contracts - Try with other references"},
+                {"error": "No existing contracts - Try with other references"},
                 status=status.HTTP_404_NOT_FOUND
             )
         self.check_object_permissions(self.request, customer)
@@ -94,4 +94,4 @@ class ContractDetail(APIView):
         customer = Customers.objects.get(id=contract.client_id)
         self.check_object_permissions(self.request, customer)
         customer.delete()
-        return Response(f"Customer deleted", status=status.HTTP_204_NO_CONTENT)
+        return Response("Customer deleted", status=status.HTTP_204_NO_CONTENT)

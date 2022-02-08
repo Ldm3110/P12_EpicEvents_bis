@@ -35,7 +35,7 @@ class EventCreation(CreateAPIView):
             contract.save()
             serializer.save(sales_contact=self.request.user)
             return Response(
-                {"success": f"The Event has been successfully created !"},
+                {"success": "The Event has been successfully created !"},
                 status=status.HTTP_201_CREATED
             )
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -80,7 +80,7 @@ class EventListFilter(ListAPIView):
         queryset = self.filter_queryset(self.get_queryset())
         if not queryset:
             return Response(
-                {"error": f"No events existing - Try with other references"},
+                {"error": "No events existing - Try with other references"},
                 status=status.HTTP_404_NOT_FOUND
             )
         self.check_object_permissions(self.request, queryset)
@@ -108,7 +108,7 @@ class CustomerEventList(ListAPIView):
             customer = Customers.objects.filter(id=queryset[0].client_id)
         except IndexError:
             return Response(
-                {"error": f"No customers existing - Try with other references"},
+                {"error": "No customers existing - Try with other references"},
                 status=status.HTTP_404_NOT_FOUND
             )
         self.check_object_permissions(self.request, queryset)

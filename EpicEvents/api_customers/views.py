@@ -1,4 +1,3 @@
-from django.http import Http404
 from django.shortcuts import get_object_or_404
 from rest_framework import status
 from rest_framework.generics import ListAPIView, CreateAPIView
@@ -63,7 +62,7 @@ class CustomerDetail(APIView):
         customer = get_object_or_404(Customers, pk=pk)
         self.check_object_permissions(self.request, customer)
         customer.delete()
-        return Response(f"Customer deleted", status=status.HTTP_204_NO_CONTENT)
+        return Response("Customer deleted", status=status.HTTP_204_NO_CONTENT)
 
 
 class CustomerFilterList(ListAPIView):
@@ -84,7 +83,7 @@ class CustomerFilterList(ListAPIView):
         queryset = self.filter_queryset(self.get_queryset())
         if not queryset:
             return Response(
-                {"error": f"This customer does not exist - Try with other references"},
+                {"error": "This customer does not exist - Try with other references"},
                 status=status.HTTP_404_NOT_FOUND
             )
         print(queryset)
