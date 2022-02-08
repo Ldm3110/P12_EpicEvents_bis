@@ -48,9 +48,8 @@ class EventDetail(APIView):
     permission_classes = [IsAuthenticated, EventPermissions]
 
     def patch(self, request, pk):
-        try:
-            event = Events.objects.filter(pk=pk)
-        except IndexError:
+        event = Events.objects.filter(pk=pk)
+        if not event:
             return Response(
                 {"error": "This event does not exist !"},
                 status=status.HTTP_404_NOT_FOUND

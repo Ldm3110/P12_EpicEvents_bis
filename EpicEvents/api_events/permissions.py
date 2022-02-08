@@ -27,6 +27,7 @@ class EventPermissions(permissions.BasePermission):
         """
         if obj[0].support_contact == request.user:
             return True
+
         return False
 
 
@@ -38,4 +39,5 @@ class CustomerInEventPermissions(permissions.BasePermission):
     def has_object_permission(self, request, view, obj):
         if obj[0].support_contact == request.user:
             return True
+
         return False

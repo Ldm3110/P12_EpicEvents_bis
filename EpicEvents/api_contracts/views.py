@@ -17,6 +17,7 @@ class ContractListAll(ListAPIView):
     """
     serializer_class = ContractSerializer
     queryset = Contracts.objects.all()
+    permission_classes = [IsAuthenticated]
 
 
 class ContractCreation(CreateAPIView):
@@ -37,6 +38,7 @@ class ContractCreation(CreateAPIView):
                 {"success": f"The Contract has been successfully created !"},
                 status=status.HTTP_201_CREATED
             )
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class ContractListFilter(ListAPIView):
@@ -62,7 +64,7 @@ class ContractListFilter(ListAPIView):
             customer = Customers.objects.filter(id=queryset[0].client_id)
         except IndexError:
             return Response(
-                {"error": f"No contract existing - Try with other references"},
+                {"error": f"No existing contracts - Try with other references"},
                 status=status.HTTP_404_NOT_FOUND
             )
         self.check_object_permissions(self.request, customer)
