@@ -82,7 +82,7 @@ You will need to fill in the following information :
 
 Refer to the API documentation at the following address :
 
-"Adress Postman"
+https://documenter.getpostman.com/view/18365116/UVeMGNqi
 
 ## Flake8 Report
 
