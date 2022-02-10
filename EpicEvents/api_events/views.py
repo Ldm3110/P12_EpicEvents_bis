@@ -1,3 +1,4 @@
+from django.shortcuts import get_object_or_404
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -60,6 +61,15 @@ class EventDetail(APIView):
             serializer.save()
             return Response({"success": "The event has been updated !"})
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, pk):
+        event = get_object_or_404(Events, pk=pk)
+        self.check_object_permissions(self.request, event)
+        event.delete()
+        return Response(
+            {"success": "Event deleted"},
+            status=status.HTTP_204_NO_CONTENT
+        )
 
 
 class EventListFilter(ListAPIView):

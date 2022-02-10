@@ -62,7 +62,10 @@ class CustomerDetail(APIView):
         customer = get_object_or_404(Customers, pk=pk)
         self.check_object_permissions(self.request, customer)
         customer.delete()
-        return Response("Customer deleted", status=status.HTTP_204_NO_CONTENT)
+        return Response(
+            {"success": "Customer deleted"},
+            status=status.HTTP_204_NO_CONTENT
+        )
 
 
 class CustomerFilterList(ListAPIView):

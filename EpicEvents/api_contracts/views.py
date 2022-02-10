@@ -94,4 +94,7 @@ class ContractDetail(APIView):
         customer = Customers.objects.get(id=contract.client_id)
         self.check_object_permissions(self.request, customer)
         customer.delete()
-        return Response("Customer deleted", status=status.HTTP_204_NO_CONTENT)
+        return Response(
+            {"success": "Contract deleted"},
+            status=status.HTTP_204_NO_CONTENT
+        )
