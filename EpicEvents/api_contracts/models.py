@@ -6,7 +6,12 @@ from src import settings
 
 class Contracts(models.Model):
     client = models.ForeignKey(Customers, on_delete=models.PROTECT, related_name='customer')
-    sales_contact = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT, related_name='sales')
+    sales_contact = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.PROTECT,
+        related_name='sales',
+        limit_choices_to={"assignment__department": "Sales"}
+    )
     # Others information
     date_created = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True)

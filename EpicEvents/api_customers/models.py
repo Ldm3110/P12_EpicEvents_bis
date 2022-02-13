@@ -13,7 +13,11 @@ class Customers(models.Model):
     date_created = models.DateTimeField(auto_now=True)
     date_updated = models.DateTimeField(auto_now_add=True)
     # Link with the seller's contact
-    sales_contact = models.ForeignKey(Employees, on_delete=models.PROTECT)
+    sales_contact = models.ForeignKey(
+        Employees,
+        on_delete=models.PROTECT,
+        limit_choices_to={"assignment__department": "Sales"}
+    )
 
     class Meta:
         verbose_name = 'Customers'

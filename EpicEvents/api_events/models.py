@@ -20,13 +20,21 @@ class Events(models.Model):
     status = models.CharField(max_length=50, choices=STATUS, default=STATUS[0])
     notes = models.TextField(max_length=2048)
     # Init relationship with others table
-    sales_contact = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT, related_name='sales_event')
+    sales_contact = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.PROTECT,
+        related_name='sales_event',
+        limit_choices_to={"assignment__department": "Sales"}
+    )
     support_contact = models.ForeignKey(
         Employees,
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
-        related_name='support_event'
+        related_name='support_event',
+        limit_choices_to={
+            "assignment__department": "Support"
+        }
     )
     client = models.ForeignKey(Customers, on_delete=models.PROTECT)
     contract = models.OneToOneField(Contracts, on_delete=models.PROTECT, unique=True)
