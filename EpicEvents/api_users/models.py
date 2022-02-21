@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
-roles = (
+ROLES = (
     ('Sales', 'Sales Team'),
     ('Support', 'Support Team')
 )
@@ -21,4 +21,4 @@ class Employees(AbstractUser):
 
 class Assignment(models.Model):
     employee = models.OneToOneField(Employees, on_delete=models.CASCADE)
-    department = models.CharField(max_length=20, choices=roles)
+    department = models.CharField(max_length=20, choices=ROLES)
