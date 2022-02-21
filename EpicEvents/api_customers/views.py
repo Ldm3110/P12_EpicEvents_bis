@@ -89,7 +89,6 @@ class CustomerFilterList(ListAPIView):
                 {"error": "This customer does not exist - Try with other references"},
                 status=status.HTTP_404_NOT_FOUND
             )
-        print(queryset)
         self.check_object_permissions(self.request, queryset)
         serializer = self.get_serializer(queryset, many=True)
         return Response(serializer.data)

@@ -59,7 +59,6 @@ class ContractListFilter(ListAPIView):
 
     def list(self, request, *args, **kwargs):
         queryset = self.filter_queryset(self.get_queryset())
-        print(queryset)
         try:
             customer = Customers.objects.filter(id=queryset[0].client_id)
         except IndexError:

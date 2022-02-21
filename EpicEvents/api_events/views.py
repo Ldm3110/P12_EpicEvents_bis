@@ -24,6 +24,11 @@ class EventListAll(ListAPIView):
 
 
 class EventCreation(CreateAPIView):
+    """
+    Creates a new instance of 'Event' if :
+    - The user is a member of 'Sales Team'
+    - The customer is attached to the User
+    """
     permission_classes = [IsAuthenticated, PermissionToAccessCustomer]
 
     def create(self, request, *args, **kwargs):
